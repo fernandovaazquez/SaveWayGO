@@ -1,19 +1,22 @@
+
 import resolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
+import strip from '@rollup/plugin-strip';
 
 export default {
-  input: [
-      'build/pwa-auth.js'
-    ],
+  input: ['build/pwa-install.js'],
   output: {
-    dir: "dist",
+    file: 'dist/pwa-install.js',
     format: 'es',
     sourcemap: false
   },
   plugins: [
     resolve(),
     minifyHTML(),
-    terser()
+    terser(),
+    strip({
+      functions: ['console.log']
+    })
   ]
 };
